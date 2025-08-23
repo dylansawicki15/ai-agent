@@ -1,11 +1,15 @@
 import os
+from config import MAX_CHARS
 def get_files_info(working_directory, directory="."):
-    abs_path = os.path.abspath(os.path.join(working_directory, directory))
-    abs_working_directory = os.path.abspath(working_directory)
+    file_root_path = os.path.dirname(__file__)
+    root_path = os.path.dirname(file_root_path)
+    abs_path = os.path.abspath(os.path.join(root_path, working_directory, directory))
+    abs_working_directory = os.path.abspath(os.path.join(root_path, working_directory))
 
     if not abs_path.startswith(abs_working_directory):
         print(f'Error: Cannot list "{directory}" as it is outside the permitted working directory')
         return
+
     if not os.path.isdir(abs_path):
         print(f'Error: "{abs_path}" is not a directory')
         return
